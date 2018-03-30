@@ -1,0 +1,26 @@
+{
+  "name": "shirou/php-framework",
+  "desscription": "A REST PHP Framework based on Phalcon",
+  "keywords": ["php framework", "rest api", "phalcon framework", "phalcon rest api"],
+  "type": "package",
+  "require": {
+    "php": "^7.0",
+    "vlucas/phpdotenv": "^2.4",
+    "mustangostang/spyc": "^0.6.2",
+    "league/flysystem": "^1.0.43",
+    "league/fractal": "^0.17.0",
+    "fightbulc/moment": "^1.26.10"
+  },
+  "license": "MIT",
+  "authors": [{
+    "name": "Nguyen Duc Duy",
+    "email": "nguyenducduy.it@gmail.com"
+  }],
+  "autoload": {
+    "psr-4": {
+      "Shirou\\": "src/Shirou/"
+    }
+  },
+  "version": "1.0.0",
+  "minimum-stability": "dev"
+}
