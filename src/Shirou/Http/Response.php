@@ -39,20 +39,19 @@ class Response extends PhResponse
             || $e instanceof \Exception
         ) {
             $message = $e->getMessage();
+            $this->statusCode = 500;
         }
 
         if ($e instanceof \Shirou\UserException) {
             $message = $this->getDI()->get('lang')->_($this->getMessage($code));
+            $this->statusCode = $this->getStatusCode($code);
         }
-
-        // Use key to obtain status code
-        $this->statusCode = $this->getStatusCode($code);
 
         $error = [
             'data' => [],
             'errors' => [
                 'code' => $code,
-                'status' => $this->getStatusCode($code),
+                'status' => $this->statusCode,
                 'message' => $message,
             ]
         ];
@@ -64,7 +63,7 @@ class Response extends PhResponse
         ];
 
         // include trace
-        // $error['developer']['trace'] = $this->parseTrace($e->getTrace());
+        $error['developer']['trace'] = $this->parseTrace($e->getTrace());
 
         return $this->_send($error);
     }

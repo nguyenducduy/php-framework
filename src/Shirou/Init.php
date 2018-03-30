@@ -14,7 +14,9 @@ use Phalcon\{
     Http\Response\Cookies as PhCookies,
     Db\Adapter\Pdo\Mysql as PhMysql,
     Security as PhSecurity,
-    Annotations\Adapter\Memory as PhAnnotationsMemory
+    Annotations\Adapter\Memory as PhAnnotationsMemory,
+    Cache\Frontend\Data as PhCacheData,
+    Cache\Frontend\Output as PhCacheOutput
 };
 use League\{
     Flysystem\Adapter\Local as FlyLocalAdapter,
