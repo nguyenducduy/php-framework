@@ -37,6 +37,7 @@ class Response extends PhResponse
             || $e instanceof \Error
             || $e instanceof \Phalcon\Di\Exception
             || $e instanceof \Exception
+            || $e instanceof \ParseError
         ) {
             $message = $e->getMessage();
             $this->statusCode = 500;
@@ -56,14 +57,16 @@ class Response extends PhResponse
             ]
         ];
 
-        $error['developer'] = [
-            'line' => $e->getLine(),
-            'file' => $e->getFile(),
-            'message' => $e->getMessage(),
-        ];
+        if (getenv('DEBUG') == 'true') {
+            $error['developer'] = [
+                'line' => $e->getLine(),
+                'file' => $e->getFile(),
+                'message' => $e->getMessage(),
+            ];
 
-        // include trace
-        $error['developer']['trace'] = $this->parseTrace($e->getTrace());
+            // include trace
+            $error['developer']['trace'] = $this->parseTrace($e->getTrace());
+        }
 
         return $this->_send($error);
     }
